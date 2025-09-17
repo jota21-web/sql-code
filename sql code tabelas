@@ -1,0 +1,52 @@
+-- Criação da tabela alunos
+CREATE TABLE IF NOT EXISTS alunos (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    nome TEXT NOT NULL,
+    email TEXT UNIQUE NOT NULL,
+    data_nascimento TEXT,
+    matricula INTEGER UNIQUE NOT NULL,
+    telefone TEXT
+);
+
+-- Inserção de dados na tabela alunos
+INSERT INTO alunos (nome, email, data_nascimento, matricula, telefone) VALUES
+('Ana Maria Souza', 'ana.souza@gmail.com', '1998-04-22', 10001, '+5511987654321'),
+('Joao', 'joao00@gmail.com', '2000-04-04', 202508, '21987654321'),
+('Gabriel Almeida', 'gabriel.almeida@gmail.com', '1999-05-30', 20015, '+5511954321098'),
+('Camila Santos', 'camila.santos@outlook.com', '1997-09-19', 20014, '+5511965432109'),
+('Rafael Mendes', 'rafael.mendes@hotmail.com', '2000-11-02', 20013, '+5511976543210');
+
+-- Criação da tabela professores
+CREATE TABLE IF NOT EXISTS professores (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    nome TEXT NOT NULL,
+    email TEXT UNIQUE NOT NULL,
+    data_nascimento TEXT,
+    telefone TEXT,
+    departamento TEXT,
+    salario REAL
+);
+
+-- Inserção de dados na tabela professores
+INSERT INTO professores (nome, email, data_nascimento, telefone, departamento, salario) VALUES
+('Carlos Alberto', 'carlos.alberto@universidade.com', '1975-08-15', '+5511999999999', 'Matemática', 7500.00),
+('Mariana Souza', 'mariana.souza@universidade.com', '1980-03-22', '+5511988888888', 'Física', 6800.50),
+('Paulo Henrique', 'paulo.henrique@universidade.com', '1969-11-30', '+5511977777777', 'Química', 7200.75),
+('Fernanda Lima', 'fernanda.lima@universidade.com', '1985-06-10', '+5511966666666', 'Biologia', 6900.00),
+('Ricardo Mendes', 'ricardo.mendes@universidade.com', '1978-01-05', '+5511955555555', 'História', 7100.25);
+
+CREATE TABLE IF NOT EXISTS alunos_professores (
+    aluno_id INTEGER,
+    professor_id INTEGER,
+    PRIMARY KEY (aluno_id, professor_id),
+    FOREIGN KEY (aluno_id) REFERENCES alunos(id) ON DELETE CASCADE,
+    FOREIGN KEY (professor_id) REFERENCES professores(id) ON DELETE CASCADE
+);
+
+INSERT INTO alunos_professores (aluno_id, professor_id) VALUES
+(1, 1),
+(1, 2),
+(2, 1),
+(3, 3),
+(4, 4),
+(5, 5);
